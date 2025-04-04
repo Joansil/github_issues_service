@@ -7,6 +7,8 @@ defmodule GithubIssuesServiceWeb.Router do
 
   scope "/api", GithubIssuesServiceWeb do
     pipe_through :api
+
+    post "/repositories", RepositoryController, :create
   end
 
   # Enable Swoosh mailbox preview in development
@@ -15,7 +17,7 @@ defmodule GithubIssuesServiceWeb.Router do
     scope "/dev" do
       pipe_through [:fetch_session, :protect_from_forgery]
 
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      # forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
 end
