@@ -1,4 +1,3 @@
-# lib/github_issues_service_web/plugs/validate_json.ex
 defmodule GithubIssuesServiceWeb.Plugs.ValidateJSON do
   import Plug.Conn
 
