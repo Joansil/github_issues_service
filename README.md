@@ -1,4 +1,4 @@
-GitHub Issues Service
+## GitHub Issues Service
 
 Serviço para recuperação de issues e contribuidores de repositórios GitHub, com processamento assíncrono e notificação via webhook.
 Funcionalidades
@@ -15,53 +15,48 @@ Requisitos
 
 Instalação
 
-bash
-
-Copy Code
 # Clone o repositório
-git clone https://github.com/seu-usuario/github_issues_service
-cd github_issues_service
+    git clone https://github.com/seu-usuario/github_issues_service
+
+    cd github_issues_service
 
 # Configure o ambiente
-cp .env.example .env
+    cp .env.example .env
 
 # Configure o webhook URL no arquivo .env
-WEBHOOK_URL=https://webhook.site/seu-endpoint-aqui
+    WEBHOOK_URL=https://webhook.site/seu-endpoint-aqui
 
 # Instale as dependências
-mix deps.get
+    mix deps.get
 
 # Execute os testes
-mix test
+    mix test
 
 # Inicie o servidor
-mix phx.server
+    mix phx.server
 
 Uso da API
 Endpoint
 
 POST /api/repositories
+
 Exemplos de Chamadas
-cURL
 
-bash
-
-Copy Code
 # Requisição básica
-curl -X POST http://localhost:4000/api/repositories \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user": "elixir-lang",
-    "repository": "elixir"
-  }'
+    curl -X POST http://localhost:4000/api/repositories \
+      -H "Content-Type: application/json" \
+      -d '{
+        "user": "elixir-lang",
+        "repository": "elixir"
+      }'
 
 # Com repositório completo do GitHub
-curl -X POST http://localhost:4000/api/repositories \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user": "elixir-lang",
-    "repository": "https://github.com/elixir-lang/elixir"
-  }'
+    curl -X POST http://localhost:4000/api/repositories \
+      -H "Content-Type: application/json" \
+      -d '{
+        "user": "elixir-lang",
+        "repository": "https://github.com/elixir-lang/elixir"
+      }'
 
 Insomnia
 
@@ -71,69 +66,57 @@ Insomnia
         Content-Type: application/json
     Body (JSON):
 
-json
-
-Copy Code
-{
-  "user": "elixir-lang",
-  "repository": "elixir"
-}
-
-Respostas
-Sucesso (202 Accepted)
-
-json
-
-Copy Code
-{
-  "message": "Request accepted, webhook will be sent in 24 hours",
-  "details": {
-    "user": "phoenixframework",
-    "repository": "phoenix"
-  }
-}
+    {
+      "user": "phoenixframework",
+      "repository": "phoenix"
+    }
+    
+    Respostas
+    Sucesso (202 Accepted)
+    
+    {
+      "message": "Request accepted, webhook will be sent in 24 hours",
+      "details": {
+        "user": "phoenixframework",
+        "repository": "phoenix"
+      }
+    }
 
 Erro - Repositório não encontrado (404)
 
-json
-
-Copy Code
-{
-  "error": "Repository not found",
-  "details": [
-    "Please ensure that:",
-    "1. The repository exists",
-    "2. The repository is public",
-    "3. The user name is correct",
-    "4. The repository name is correct"
-  ]
-}
+    {
+      "error": "Repository not found",
+      "details": [
+        "Please ensure that:",
+        "1. The repository exists",
+        "2. The repository is public",
+        "3. The user name is correct",
+        "4. The repository name is correct"
+      ]
+    }
 
 Webhook Payload
 
 O serviço enviará o seguinte payload para o webhook configurado após 24 horas:
 
-json
-
-Copy Code
-{
-  "user": "elixir-lang",
-  "repository": "elixir",
-  "issues": [
     {
-      "title": "Issue Title",
-      "author": "username",
-      "labels": ["bug", "feature"]
+      "user": "phoenixframework",
+      "repository": "phoenix",
+      "issues": [
+        {
+          "title": "Issue Title",
+          "author": "username",
+          "labels": ["bug", "feature"]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Contributor Name",
+          "user": "username",
+          "qtd_commits": 123
+        }
+      ]
     }
-  ],
-  "contributors": [
-    {
-      "name": "Contributor Name",
-      "user": "username",
-      "qtd_commits": 123
-    }
-  ]
-}
 
 Configuração do Webhook
 
@@ -151,19 +134,14 @@ Configuração do Webhook
 
 Testes
 
-bash
-
-Copy Code
 # Executa todos os testes
-mix test
+    mix test
 
 # Executa testes com cobertura
-mix test --cover
+    mix test --cover
 
 # Análise estática
-mix dialyzer
-
-
+    mix dialyzer
 ps.: o processamento assíncrono está configurado para enviar o webhook imediatamente para teste, vide função:
       ```GithubIssuesService.Repositories.Repository.fetch_repository_data```
       
