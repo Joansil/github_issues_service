@@ -20,5 +20,5 @@ defmodule GithubIssuesServiceWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :github_issues_service
+  # use Gettext, otp_app: :github_issues_service
 end

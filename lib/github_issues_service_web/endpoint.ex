@@ -27,7 +27,6 @@ defmodule GithubIssuesServiceWeb.Endpoint do
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :github_issues_service
   end
 
   plug Plug.RequestId
