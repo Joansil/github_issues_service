@@ -8,6 +8,16 @@ defmodule GithubIssuesService.Repositories.Repository do
 
   require Logger
 
+  @type repository_data :: %{
+    user: binary(),
+    repository: binary(),
+    issues: list(map()),
+    contributors: list(map())
+  }
+
+  @type repository_response :: {:ok, repository_data} | {:error, any()}
+
+  @spec fetch_repository_data(binary(), binary()) :: repository_response
   def fetch_repository_data(user, repo) do
     Logger.info("Fetching repository data for #{user}/#{repo}")
 
@@ -42,6 +52,7 @@ defmodule GithubIssuesService.Repositories.Repository do
     end
   end
 
+  @spec format_issues(list(map())) :: list(map())
   defp format_issues(issues) do
     Enum.map(issues, fn issue ->
       %{
@@ -52,6 +63,7 @@ defmodule GithubIssuesService.Repositories.Repository do
     end)
   end
 
+  @spec format_contributors(list(map())) :: list(map())
   defp format_contributors(contributors) do
     Enum.map(contributors, fn contributor ->
       %{
