@@ -30,9 +30,4 @@ defmodule GithubIssuesServiceWeb.ConnCase do
       import GithubIssuesServiceWeb.ConnCase
     end
   end
-
-  setup tags do
-    GithubIssuesService.DataCase.setup_sandbox(tags)
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
-  end
 end
