@@ -3,6 +3,8 @@ defmodule GithubIssuesServiceWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+
+    plug GithubIssuesServiceWeb.Plugs.ValidateJSON
   end
 
   scope "/api", GithubIssuesServiceWeb do

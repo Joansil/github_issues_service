@@ -41,8 +41,11 @@ defmodule GithubIssuesService.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 2.0"},
       {:quantum, "~> 3.0"},
-      {:mock, "~> 0.3.0", only: :test}
+      {:mock, "~> 0.3.0", only: :test},
+      {:dotenvy, "~> 0.8.0", runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
+
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -6,3 +6,8 @@ config :github_issues_service, GithubIssuesServiceWeb.Endpoint,
   server: false
 
 config :logger, level: :warning
+
+# Configuração de teste para webhook
+config :github_issues_service,
+  webhook_url: "http://test-webhook.com"
+

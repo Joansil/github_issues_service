@@ -35,7 +35,8 @@ defmodule GithubIssuesServiceWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Phoenix.json_library()
+    json_decoder: Phoenix.json_library(),
+    error_handler: &GithubIssuesServiceWeb.ErrorHandler.handle_errors/2
 
   plug Plug.MethodOverride
   plug Plug.Head
